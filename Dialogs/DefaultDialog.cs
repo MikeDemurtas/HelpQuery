@@ -9,5 +9,15 @@ namespace LUISBotApplication.Dialogs
 
 	public class DefaultDialog : LuisDialog<object>
 	{
+	
+	[LuisIntent("")]
+	public async Task None(IDialogContext context, LuisResult result)
+	{
+	await context.PostAsync("Sorry");
+	context.Wait(MessageReceived);
+	}
+	
+	
+	
 	}
 }
