@@ -21,7 +21,28 @@ using Microsoft.Bot.Connector;
 // -CosmosDbEndpoint set to your cosmos db endpoint
 // -CosmosDbKey set to your cosmos db key
 
+internal static IDialog<object> MakeRoot()
 {
+  return Chain.From(() => new DefaultDialog());
+  
+}
+
+public async Task<HttpResponseMessage> post ([FromBody]Activity activity)
+{
+if (activity.Type == ActivityTypes.Message)
+{
+await Conversation.SendAsync(activity, MakeRoot);
+}
+else
+{
+HandleSystemMessage(Activity);
+}
+var response = Request.CreateResponse(HttpStatusCode.OK);
+return response;
+
+}
+
+
 public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
 {
     log.Info($"Webhook was triggered!");
