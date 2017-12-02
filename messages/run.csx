@@ -27,7 +27,7 @@ internal static IDialog<object> MakeRoot()
   
 }
 
-public async Task<HttpResponseMessage> post ([FromBody]Activity activity)
+public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
 {
 if (activity.Type == ActivityTypes.Message)
 {
